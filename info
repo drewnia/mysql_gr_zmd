@@ -1,0 +1,17 @@
+База данных 
+Анализируем одновагонные отцепы 
+При анализе работы ТП СЧ берем скорость входа на первый замедлитель а расчетную скорость на втором.
+Анализ нагона производить отдельно, когда после сообщения 1 в merge_gr_zmd идет сообщение 1, а не 7.
+
+1.	Скорость входа v_upr, номер отцепа
+select time, nom_iu, time_ev, msec_ev,v_upr, kzp, v_pmin, from_unixtime(time_ev) from merge_gr_zmd where n_zmd =4 and n_mes in (1) limit 10;
+2.	Масса
+Кол-во вагонов в отцепе содержится в таблице merge_iu_head
+3.	Кол-во вагонов
+Кол-во вагонов в отцепе содержится в таблице merge_iu_head
+4.	Скорость расчетная v_pmax
+5.	Скорость выхода v_ust
+select time, nom_iu, time_ev, msec_ev,v_ust, v_pmax, kzp, from_unixtime(time_ev) from merge_gr_zmd where n_zmd =5 and n_mes in (7) limit 10;
+6.	Расстояние по маршруту следования до ближайшего отцепа
+7.	Кол-во включений, номер ступени и их длительность
+select from_unixtime(time_ev),msec_ev,n_zmd,inf2&0xf from gr_zmd_1636765200 where n_zmd in (4,5) and n_mes between 2 and 5 and time_ev between unix_timestamp('2021-11-13 06:15:57') and unix_timestamp('2021-11-13 06:16:15') limit 1000;
