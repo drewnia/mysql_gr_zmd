@@ -12,8 +12,8 @@ N_ZMD = 4
 class AbstractItem(object):
     _metaclass__ = ABCMeta
 
-    def __init__(self, t, iu, sn):
-        self.tRosp = int(t)
+    def __init__(self, tRosp, iu, sn):
+        self.tRosp = int(tRosp)
         self.iu = int(iu)
         self.sn = int(sn)
 
@@ -86,14 +86,16 @@ for res in cur.fetchall():
     ves = int(res[4])
     if int(res[6]) > 0:
         ves = int(res[5])
-    t_rosp = int(res[0])
+    tRosp = int(res[0])
     iu = int(res[1])
     sn = int(res[2])
-    if len(massItems)>0 \
-            or t_rosp != massItems[-1].t \
+    if not massItems \
+            or tRosp != massItems[-1].tRosp \
             or iu != massItems[-1].iu \
             or sn != massItems[-1].sn:
-            massItems.append(MassItem(res[0], res[1], res[2], res[3], res[4], res[5], res[6]))
+            massItems.append(MassItem(tRosp, iu, sn, ves))
+    else:
+        massItems[-1].increment_mass(ves)
 # print(cur.fetchall())
 # for res in cur.fetchall():
 
