@@ -15,3 +15,6 @@ select time, nom_iu, time_ev, msec_ev,v_ust, v_pmax, kzp, from_unixtime(time_ev)
 6.	Расстояние по маршруту следования до ближайшего отцепа
 7.	Кол-во включений, номер ступени и их длительность
 select from_unixtime(time_ev),msec_ev,n_zmd,inf2&0xf from gr_zmd_1636765200 where n_zmd in (4,5) and n_mes between 2 and 5 and time_ev between unix_timestamp('2021-11-13 06:15:57') and unix_timestamp('2021-11-13 06:16:15') limit 1000;
+
+
+!!!количество заторможенных осей
